@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Form</title>
+<style>
+    body {
+        background: linear-gradient(to bottom right, cyan, red);
+        font-family: Arial, sans-serif;
+    }
+    .rainbow-text {
+        background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+        -webkit-background-clip: text;
+        color: transparent;
+        display: inline-block;
+        /* Added vendor prefixes for cross-browser compatibility */
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    form {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+    }
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: none;
+        border-radius: 5px;
+    }
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: hotpink; /* Changed to hotpink */
+        color: white; /* Changed text color to white for better contrast */
+        cursor: pointer;
+    }
+    .success-message {
+        background-color: black;
+        color: green;
+        text-align: center;
+        padding: 50px;
+        font-size: 24px;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        display: none;
+    }
+    .loading-screen {
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    .loading-text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .cash-gif {
+        display: none;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+</head>
+<body>
+
+<form action="#" method="post">
+    <label for="name" class="rainbow-text">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="age" class="rainbow-text">Age:</label>
+    <input type="number" id="age" name="age" required>
+
+    <label for="cash" class="rainbow-text">Cash:</label>
+    <input type="number" id="cash" name="cash" required>
+
+    <input type="submit" value="Submit">
+</form>
+
+<!-- Success message section -->
+<div class="success-message" style="display: none;">
+    SUCCESS! YOUR CASH HAS BEEN STORED SUCCESSFULLY. <br>
+    Amount stored: <span id="stored-cash"></span>
+</div>
+
+<!-- Loading screen -->
+<div class="loading-screen">
+    <div class="loading-text">Loading...</div>
+    <img class="cash-gif" src="YOUR_DIRECT_GIF_LINK_HERE" alt="Cash flying">
+</div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var name = document.getElementById('name').value;
+        var age = document.getElementById('age').value;
+        var cash = document.getElementById('cash').value;
+        
+        // Display loading screen
+        var loadingScreen = document.querySelector('.loading-screen');
+        loadingScreen.style.display = 'flex';
+
+        // Simulate delay (You can remove this setTimeout function in actual implementation)
+        setTimeout(function() {
+            // Hide loading screen
+            loadingScreen.style.display = 'none';
+
+            // Display success message
+            var successMessage = document.querySelector('.success-message');
+            successMessage.style.display = 'block';
+            document.getElementById('stored-cash').textContent = '$' + cash;
+
+            // Display cash GIF
+            var cashGif = document.querySelector('.cash-gif');
+            cashGif.style.display = 'block';
+        }, 2000); // Shortened to 2 seconds
+    });
+</script>
+
+</body>
+</html>
